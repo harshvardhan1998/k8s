@@ -1,4 +1,6 @@
 #!/bin/bash
+
+sudo su
  
 #kubelet requires swap off
 swapoff -a
