@@ -3,7 +3,7 @@
 
  
 #kubelet requires swap off
-sudo swapoff -a
+swapoff -a
 
 # Install Docker CE
 ## Set up the repository:
@@ -11,7 +11,7 @@ sudo swapoff -a
 sudo apt-get update && sudo apt-get install   apt-transport-https ca-certificates curl software-properties-common -y
 
 ### Add Docker’s official GPG key
-sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg |sudo  apt-key add -
 
 ### Add Docker apt repository.
 sudo add-apt-repository \
@@ -25,7 +25,7 @@ sudo apt-get update && sudo apt-get install -y  \
   docker-ce=5:19.03.4~3-0~ubuntu-$(lsb_release -cs) \
   docker-ce-cli=5:19.03.4~3-0~ubuntu-$(lsb_release -cs)
 
-# Setup daemon.
+# Setup daemon. by root
 sudo cat > /etc/docker/daemon.json <<EOF
 {
   "exec-opts": ["native.cgroupdriver=systemd"],
@@ -46,9 +46,9 @@ sudo systemctl restart docker
 
 #Installing kubeadm, kubelet and kubectl
 sudo apt-get update &&  sudo apt-get install -y apt-transport-https curl
-sudo curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg |  apt-key add -
+sudo curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
 
-cat <<EOF |  tee /etc/apt/sources.list.d/kubernetes.list
+cat <<EOF | sudo tee /etc/apt/sources.list.d/kubernetes.list
 deb https://apt.kubernetes.io/ kubernetes-xenial main
 EOF
 
